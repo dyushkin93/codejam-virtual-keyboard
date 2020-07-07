@@ -1,0 +1,125 @@
+/* reset defautl */
+* {
+  margin: 0;
+  padding: 0;
+  font: 400 16px Calibri;
+}
+
+header {
+  width: 720px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+header p {
+  font-size: 18px;
+}
+
+.keyboard-wrapper {
+  width: 720px;
+  margin: 0 auto;
+}
+
+textarea {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  height: 200px;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.keyboard > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+  height: 43px;
+  border-radius: 5px;
+  color: azure;
+  background-color: rgb(59, 59, 59);
+  cursor: pointer;
+}
+
+.keyboard > div:hover {
+  box-shadow: 0 0 3px black;
+}
+
+.small-key {
+  width: 43px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.russian {
+
+}
+
+.english {
+  display: none;
+}
+
+.keyboard > .modifier-key {
+  justify-content: flex-start;
+}
+
+.modifier-key p {
+  margin-left: 5px;
+}
+
+.backspace {
+  width: 67px;
+  font-size: 14px;
+}
+
+.backspace p {
+  font-size: 14px;
+}
+
+.tab {
+  flex-basis: 66px;
+}
+
+.capslock,
+.enter {
+  width: 79px;
+}
+
+.shift {
+  width: 104px;
+}
+
+.alt {
+  width: 56px;
+}
+
+.ctrl,
+.win {
+  width: 45px;
+}
+
+.space {
+  width: 241px;
+}
+
+.space p {
+  display: none;
+}
+
+.keyboard > .arrow {
+  width: 43px;
+}
