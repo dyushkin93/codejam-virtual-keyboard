@@ -49,6 +49,7 @@ textarea {
   color: azure;
   background-color: rgb(59, 59, 59);
   cursor: pointer;
+  user-select: none;
 }
 
 .keyboard > div:hover {
@@ -66,11 +67,11 @@ textarea {
 }
 
 .russian {
-
+  display: none;
 }
 
 .english {
-  display: none;
+  display: block;
 }
 
 .keyboard > .modifier-key {
@@ -122,4 +123,8 @@ textarea {
 
 .keyboard > .arrow {
   width: 43px;
+}
+
+.keyboard > .pressed {
+ background-color: rgb(110, 110, 110); 
 }
