@@ -128,8 +128,27 @@ let keyActions = {
         element.style.display = "block";
       });
       enTitles.forEach(element => {
-        element.style.display = "none";
+        element.style.display = "none"; // [a, b ,a|, f, a, f, a]
       });
+    }
+  },
+  arrowUp() {
+    let arr = textArea.value.split("").reverse().join("");
+    let moveTo = arr.indexOf("\n", arr.length - textArea.selectionStart);
+    if (moveTo === -1) {
+      textArea.selectionStart = textArea.selectionEnd = 0;
+    } else {
+      textArea.selectionStart = textArea.selectionEnd = arr.length -  moveTo - 1;
+    }
+  },
+  arrowDown() {
+    let moveTo = textArea.value.indexOf("\n", textArea.selectionStart);
+    if (moveTo === -1) {
+      textArea.selectionStart = textArea.selectionEnd = textArea.value.length;
+    } else {
+      textArea.selectionStart = textArea.selectionEnd = moveTo + 1;
+      moveTo = textArea.value.indexOf("\n", textArea.selectionStart);
+      textArea.selectionStart = textArea.selectionEnd = moveTo;
     }
   }
 }
@@ -179,10 +198,10 @@ for (let key in Keyboard) {
           }
           break;
         case "ArrowUp":
-          
+          keyActions.arrowUp();
           break;
         case "ArrowDown":
-          
+          keyActions.arrowDown();
           break;
         case "ArrowRight":
           textArea.selectionStart = textArea.selectionStart + 1;
@@ -197,7 +216,7 @@ for (let key in Keyboard) {
     } else if (/Enter/.test(Keyboard[key].keyCode)) {
       keyActions.input("\n");
     } else if (/Tab/.test(Keyboard[key].keyCode)) {
-      keyActions.input("  ");
+      keyActions.input("\t");
     } else if (/BracketLeft|BracketRight|Semicolon|Quote|Comma|Period/.test(Keyboard[key].keyCode)) { //keys with only russian letters
       Keyboard[key].block.classList.add("pressed");
       if ((Keyboard.ShiftRight.pressed === true || Keyboard.ShiftLeft.pressed === true) && language === "EN") {
@@ -262,7 +281,6 @@ textArea.onkeydown = e => {
 }
 
 textArea.onkeyup = e => {
-  console.log(e);
   if (e.code === "CapsLock") {
     if (!e.getModifierState("CapsLock")) {
       Keyboard[e.code].block.classList.remove("pressed");
