@@ -17,8 +17,8 @@ class Key {
     this.enUpperCase = enUpperCase;
     this.ruLowerCase = ruLowerCase;
     this.ruUpperCase = ruUpperCase;
-    this.init();
     this.pressed = false;
+    this.init();
   }
   init() {
     this.block = document.createElement("div");
@@ -139,7 +139,6 @@ let keyActions = {
 for (let key in Keyboard) {
   Keyboard[key].block.addEventListener("mousedown", e => {
     e.preventDefault();
-    textArea.focus();
     if (/^(CapsLock)/.test(Keyboard[key].keyCode)) {
       Keyboard[key].block.classList.add("pressed");
       keyActions.modifierToggle(Keyboard[key]);
@@ -245,4 +244,33 @@ for (let key in Keyboard) {
       Keyboard[key].block.classList.remove("pressed");
     }
   })
+}
+
+// add keys highlighting from physical keyboard
+
+textArea.onkeydown = e => {
+  if (e.code === "CapsLock") {
+    Keyboard[e.code].block.classList.add("pressed");
+    if (e.getModifierState("CapsLock")) {
+      Keyboard[e.code].pressed = true;
+    } else {
+      Keyboard[e.code].pressed = false;
+    }
+  } else {
+    Keyboard[e.code].block.classList.add("pressed");
+  }
+}
+
+textArea.onkeyup = e => {
+  console.log(e);
+  if (e.code === "CapsLock") {
+    if (!e.getModifierState("CapsLock")) {
+      Keyboard[e.code].block.classList.remove("pressed");
+    }
+  } else {
+    Keyboard[e.code].block.classList.remove("pressed");
+  }
+  if ((e.getModifierState("Alt") === true && e.key === "Shift") || (e.getModifierState("Shift") === true && e.key === "Alt")) {
+    keyActions.changeLang();
+  }
 }
