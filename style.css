@@ -39,7 +39,7 @@ textarea {
   align-items: flex-end;
 }
 
-.keyboard > div {
+.keyboard > button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,10 +50,17 @@ textarea {
   background-color: rgb(59, 59, 59);
   cursor: pointer;
   user-select: none;
+  border: none;
+  box-sizing: border-box;
 }
 
-.keyboard > div:hover {
+.keyboard > button:hover {
   box-shadow: 0 0 3px black;
+}
+
+.keyboard > button:active {
+  border: none;
+  background-color: rgb(110, 110, 110); 
 }
 
 .small-key {
@@ -126,5 +133,5 @@ textarea {
 }
 
 .keyboard > .pressed {
- background-color: rgb(110, 110, 110); 
+  background-color: rgb(110, 110, 110); 
 }

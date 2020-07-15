@@ -21,7 +21,7 @@ class Key {
     this.init();
   }
   init() {
-    this.block = document.createElement("div");
+    this.block = document.createElement("button");
     if (/^(Backspace|Tab|CapsLock|Enter|Shift|Control|Alt|Meta|Space)/.test(this.keyCode)) { // set titles of modifier keys
       this.block.className = `modifier-key ${this.enLowerCase.toLowerCase()}`;
       this.block.innerHTML = `<p>${this.enLowerCase}</p>`;
@@ -178,7 +178,6 @@ for (let key in Keyboard) {
         keyActions.modifierToggle(Keyboard[key]);
       }
     } else if (/^Key/.test(Keyboard[key].keyCode)) {
-      Keyboard[key].block.classList.add("pressed");
       if ((Keyboard.CapsLock.pressed === true || Keyboard.ShiftRight.pressed === true || Keyboard.ShiftLeft.pressed === true) && language === "EN") {
         keyActions.input(Keyboard[key].enUpperCase);
       } else if ((Keyboard.CapsLock.pressed === true || Keyboard.ShiftRight.pressed === true || Keyboard.ShiftLeft.pressed === true) && language === "RU") {
