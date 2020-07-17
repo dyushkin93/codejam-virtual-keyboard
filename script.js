@@ -6,10 +6,7 @@ const ruUpperCases = ["Ё", "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")",
 
 const enUpperCases = ["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "Backspace", "Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "|", "CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"", "Enter", "Shift", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", "Shift", "Ctrl", "Win", "Alt", " ", "Alt", "Ctrl", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"];
 
-const enLowerCases = ["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace", "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "CapsLock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter", "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Shift", "Ctrl", "Win", "Alt", "space", "Alt", "Ctrl", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"]; 
-
-let language = "EN";
-
+const enLowerCases = ["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace", "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "CapsLock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter", "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Shift", "Ctrl", "Win", "Alt", "space", "Alt", "Ctrl", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"];
 class Key {
   constructor(keyCode, enLowerCase, enUpperCase, ruLowerCase, ruUpperCase) {
     this.keyCode = keyCode;
@@ -113,7 +110,13 @@ let keyActions = {
     return keyObj.pressed === true ? keyObj.pressed = false : keyObj.pressed = true;
   },
   changeLang () {
-    language === "EN" ? language = "RU" : language = "EN";
+    if (language === "EN") {
+      language = "RU"
+      localStorage.setItem("language", "RU");
+    } else {
+      language = "EN";
+      localStorage.setItem("language", "EN");
+    }
     ruTitles = document.querySelectorAll(".russian");
     enTitles = document.querySelectorAll(".english");
     if (language === "EN") {
@@ -128,7 +131,7 @@ let keyActions = {
         element.style.display = "block";
       });
       enTitles.forEach(element => {
-        element.style.display = "none"; // [a, b ,a|, f, a, f, a]
+        element.style.display = "none";
       });
     }
   },
@@ -151,6 +154,25 @@ let keyActions = {
       textArea.selectionStart = textArea.selectionEnd = moveTo;
     }
   }
+}
+
+//saing in local storage current input language
+
+if (localStorage.getItem("language") != undefined) {
+  language = localStorage.getItem("language");
+  if (language === "RU") {
+    ruTitles = document.querySelectorAll(".russian");
+    enTitles = document.querySelectorAll(".english");{
+    ruTitles.forEach(element => {
+      element.style.display = "block";
+    });
+    enTitles.forEach(element => {
+      element.style.display = "none";
+    });
+    }
+  }
+} else {
+  localStorage.setItem("language", "EN");
 }
 
 // add handler for mouse click
